@@ -56,12 +56,6 @@ self = stdenv.mkDerivation rec {
     "-DINSTALL_SHAREDIR=share/mysql"
   ];
 
-  postInstall = ''
-    moveToOutput "lib/*.a" $static
-    so=${stdenv.hostPlatform.extensions.sharedLibrary}
-    ln -s libmysqlclient$so $out/lib/libmysqlclient_r$so
-  '';
-
   passthru = {
     client = self;
     connector-c = self;
